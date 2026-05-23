@@ -1,0 +1,19 @@
+devpulse --->> 
+vs- npm init --y          >>> package.json
+vs- npm i -D typescript   >>>(-D->development)
+vs- npx tsc --init        >>> config 
+
+tsconfig.com--->>>  
+// File Layout
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+"module": "esnext",
+"types": ["node"],
+
+// "jsx": "react-jsx",   --comment thakbe
+
+package.json -->>> 
+"type": "commonjs", >>> "type": "module",
+
+vs --Root --- create folder - src
