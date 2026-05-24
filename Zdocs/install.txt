@@ -42,3 +42,9 @@ Create User--->> Postman,neondbn  --- app.use middleware ,req body...
 ****Postgre--->>pool.query -neondb
 
 server>> server.ts connected Neondb by pg- npm i pg -- npm i --save-dev @types/pg
+
+============CRUD
+create table>>> https://www.w3schools.com/postgresql/postgresql_create_table.php
+
+
+
