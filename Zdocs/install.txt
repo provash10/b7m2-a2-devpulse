@@ -1,3 +1,4 @@
+1. create folder
 devpulse --->> 
 vs- npm init --y          >>> package.json
 vs- npm i -D typescript   >>>(-D->development)
@@ -17,3 +18,15 @@ package.json -->>>
 "type": "commonjs", >>> "type": "module",
 
 vs --Root --- create folder - src
+
+2. express setup 
+npm i express ///import -- npm i --save-dev @types/express
+
+3.tsx --- npm i tsx >> npm i -D tsx
+package.json --->>>
+"scripts": {
+    "dev" : "tsx watch ./src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  vs--- npm run dev
