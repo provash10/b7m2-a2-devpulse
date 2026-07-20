@@ -5,10 +5,10 @@ import { authService } from "./auth.service";
 
 const registerUser = async (req: Request, res: Response) => {
   // console.log(req.body);
-//   const { name, email, password,role } = req.body;
+  //   const { name, email, password,role } = req.body;
 
   try {
-     const result =await authService.registerUserIntoDB(req.body);
+    const result = await authService.registerUserIntoDB(req.body);
 
     res.status(201).json({
       message: "User Created Successfully",
@@ -20,9 +20,27 @@ const registerUser = async (req: Request, res: Response) => {
       error: error,
     });
   }
-}
+};
 
+const loginUser = async (req: Request, res: Response) => {
+  try {
+    const result = await authService.loginUserIntoDB(req.body);
 
-export const authController ={
-    registerUser,
-}
+    return res.status(200).json({
+        success: true,
+      message: "Login successful",
+      data: result,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+        success: false,
+      message: error.message,
+      error:error,
+    });
+  }
+};
+
+export const authController = {
+  registerUser,
+  loginUser,
+};
