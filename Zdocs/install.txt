@@ -33,8 +33,10 @@ package.json --->>>
   },
 
   vs--- npm run dev
-
-
+Dev Pulse A2 DB from prisma postgres
+postgres://27237a2210df7d4b4f15177b8840c2d744c5a966a82f5111d5870d6e9f61255b:sk_o2ISVjPZxAoVc9SNOXGKx@pooled.db.prisma.io:5432/postgres?sslmode=require
+  NeonDB ---postgresql://neondb_owner:npg_XV9nTa8GevUR@ep-nameless-surf-ap8vqmop-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+  
   ======================>>>>
   Get/Post...--- method e create user by postman use Neondb and //as middleware
 app.use(express.json()); 
@@ -45,6 +47,18 @@ server>> server.ts connected Neondb by pg- npm i pg -- npm i --save-dev @types/p
 
 ============CRUD
 create table>>> https://www.w3schools.com/postgresql/postgresql_create_table.php
+
+initDB();
+
+npm i bcryptjs for hashpassword
+
+env--- npm i dotenv
+
+
+dist---npx tsc
+================
+
+
 
 
 
