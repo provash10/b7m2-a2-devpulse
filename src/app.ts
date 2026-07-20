@@ -11,21 +11,15 @@ import config from "./config";
 import { pool } from "./db";
 import { authRoute } from "./modules/auth/auth.route";
 import fs from "fs";
+import logger from "./middleware/logger";
 
 //as middleware
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-  console.log('Method - URL -Time:',req.method, req.url, Date.now());
-  const log = `\nMethod -> ${req.method} - Time-> ${Date.now()} - URL ->${req.url}\n`;
-  fs.appendFile("logger.txt", log,(err)=>{
-    console.log(err);
-  })
-
-  next();
-});
+//middleware
+app.use(logger);
 
 // server connected Neondb by pg
 // initDB();
