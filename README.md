@@ -6,8 +6,7 @@ DevPulse is a collaborative backend REST API platform designed for software engi
 
 ## 🔗 Links
 - **Live Deployment:** [https://devpulse-wine.vercel.app](https://devpulse-wine.vercel.app)
-- **GitHub Repository:** [https://github.com/provash10/b7m2-a2-devpulse](https://github.com/provash10/b7m2-a2-devpulse)
-
+- **GitHub Repository:** [https://github.com/provash10/b7m2-a2-devpulse](https://github.com/provash10/b7m2-a2-devpulse) 
 ---
 
 ## 🚀 Features
