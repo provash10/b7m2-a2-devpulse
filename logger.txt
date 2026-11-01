@@ -366,3 +366,7 @@ Method -> GET - Time-> 1793518711811 - URL ->/api/issues?sort=newest
 Method -> POST - Time-> 1793518745228 - URL ->/api/auth/login
 
 Method -> DELETE - Time-> 1793518817124 - URL ->/api/issues/8
+
+Method -> GET - Time-> 1793535859965 - URL ->/
+
+Method -> GET - Time-> 1793535860239 - URL ->/favicon.ico
