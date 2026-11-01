@@ -4,41 +4,29 @@ import express, {
   type Response,
 } from "express";
 const app: Application = express();
-// const port = config.port;
 
-import bcrypt from "bcryptjs";
 import config from "./config";
 import { pool } from "./db";
 import { authRoute } from "./modules/auth/auth.route";
-import fs from "fs";
+import { issueRoute } from "./modules/issues/issues.route";
 import logger from "./middleware/logger";
 
-//as middleware
+// middleware
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
-
-//middleware
 app.use(logger);
 
-// server connected Neondb by pg
-// initDB();
-
-//method
+// root route
 app.get("/", (req: Request, res: Response) => {
-  // res.send('Dev Pulse Server Running !')
   res.status(200).json({
     message: "Express Server",
     author: "Dev Pulse",
   });
 });
 
-app.use("/api/auth", authRoute)
-
-//users
-
-
-//POST
-
+// routes
+app.use("/api/auth", authRoute);
+app.use("/api/issues", issueRoute);
 
 export default app;

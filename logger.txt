@@ -288,3 +288,7 @@ Method -> GET - Time-> 1793509229908 - URL ->/favicon.ico
 Method -> POST - Time-> 1793510185632 - URL ->/api/auth/signup
 
 Method -> POST - Time-> 1793510244768 - URL ->/api/auth/login
+
+Method -> POST - Time-> 1793511969770 - URL ->/api/issues
+
+Method -> POST - Time-> 1793512028900 - URL ->/api/issues
