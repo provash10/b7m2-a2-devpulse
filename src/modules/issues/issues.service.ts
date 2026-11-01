@@ -179,10 +179,22 @@ const updateSingleIssueIntoDB = async (
   return result.rows[0];
 };
 
+const deleteIssueFromDB = async (id: string) => {
+  // delete issue by id
+  // console.log(id);
+  const result = await pool.query(
+    `DELETE FROM issues WHERE id = $1 RETURNING *`,
+    [id]
+  );
+  // console.log(result.rowCount);
+  return result;
+};
+
 export const issuesService = {
   createIssueIntoDB,
   getAllIssuesFromDB,
   getSingleIssueFromDB,
   getIssueByIdFromDB,
   updateSingleIssueIntoDB,
+  deleteIssueFromDB,
 };
