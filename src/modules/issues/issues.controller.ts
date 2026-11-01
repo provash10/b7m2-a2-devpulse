@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { issuesService } from "./issues.service";
 import type { IssueStatus, IssueType } from "./issues.interface";
+import sendResponse from "../../utils/sendResponse";
 
 const createIssue = async (req: Request, res: Response) => {
   try {
@@ -11,7 +12,8 @@ const createIssue = async (req: Request, res: Response) => {
 
     // check reporter id exists
     if (!reporter_id) {
-      return res.status(401).json({
+      return sendResponse(res, {
+        statusCode: 401,
         success: false,
         message: "Unauthorized access! User not identified.",
       });
@@ -19,7 +21,8 @@ const createIssue = async (req: Request, res: Response) => {
 
     // validate required fields
     if (!title || !description || !type) {
-      return res.status(400).json({
+      return sendResponse(res, {
+        statusCode: 400,
         success: false,
         message: "Validation Error: title, description, and type are required.",
       });
@@ -34,14 +37,16 @@ const createIssue = async (req: Request, res: Response) => {
     });
     // console.log(result);
 
-    return res.status(201).json({
+    return sendResponse(res, {
+      statusCode: 201,
       success: true,
       message: "Issue created successfully",
       data: result,
     });
   } catch (error: any) {
     // console.log(error);
-    return res.status(500).json({
+    return sendResponse(res, {
+      statusCode: 500,
       success: false,
       message: error?.message || "Failed to create issue",
       errors: error,
@@ -63,14 +68,16 @@ const getAllIssues = async (req: Request, res: Response) => {
     });
     // console.log(result);
 
-    return res.status(200).json({
+    return sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Issues retrived successfully",
       data: result,
     });
   } catch (error: any) {
     // console.log(error);
-    return res.status(500).json({
+    return sendResponse(res, {
+      statusCode: 500,
       success: false,
       message: error?.message || "Failed to retrieve issues",
       errors: error,
@@ -90,20 +97,23 @@ const getSingleIssue = async (req: Request, res: Response) => {
 
     // check if issue exists
     if (!result) {
-      return res.status(404).json({
+      return sendResponse(res, {
+        statusCode: 404,
         success: false,
         message: "Issue not found",
       });
     }
 
-    return res.status(200).json({
+    return sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Issue retrived successfully",
       data: result,
     });
   } catch (error: any) {
     // console.log(error);
-    return res.status(500).json({
+    return sendResponse(res, {
+      statusCode: 500,
       success: false,
       message: error?.message || "Failed to retrieve issue",
       errors: error,
@@ -121,7 +131,8 @@ const updateIssue = async (req: Request, res: Response) => {
 
     // check if user authenticated
     if (!user) {
-      return res.status(401).json({
+      return sendResponse(res, {
+        statusCode: 401,
         success: false,
         message: "Unauthorized access! User not identified.",
       });
@@ -133,7 +144,8 @@ const updateIssue = async (req: Request, res: Response) => {
 
     // check if issue exists
     if (!issue) {
-      return res.status(404).json({
+      return sendResponse(res, {
+        statusCode: 404,
         success: false,
         message: "Issue not found",
       });
@@ -143,7 +155,8 @@ const updateIssue = async (req: Request, res: Response) => {
     if (user.role === "contributor") {
       // contributor can only update own issue
       if (issue.reporter_id !== user.id) {
-        return res.status(403).json({
+        return sendResponse(res, {
+          statusCode: 403,
           success: false,
           message: "Forbidden! You can only update your own issues.",
         });
@@ -151,7 +164,8 @@ const updateIssue = async (req: Request, res: Response) => {
 
       // contributor can only update open status issue
       if (issue.status !== "open") {
-        return res.status(409).json({
+        return sendResponse(res, {
+          statusCode: 409,
           success: false,
           message: "Conflict! Cannot update issue that is not in open status.",
         });
@@ -173,14 +187,16 @@ const updateIssue = async (req: Request, res: Response) => {
     );
     // console.log(updatedIssue);
 
-    return res.status(200).json({
+    return sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Issue updated successfully",
       data: updatedIssue,
     });
   } catch (error: any) {
     // console.log(error);
-    return res.status(500).json({
+    return sendResponse(res, {
+      statusCode: 500,
       success: false,
       message: error?.message || "Failed to update issue",
       errors: error,
@@ -198,7 +214,8 @@ const deleteIssue = async (req: Request, res: Response) => {
 
     // check if user authenticated
     if (!user) {
-      return res.status(401).json({
+      return sendResponse(res, {
+        statusCode: 401,
         success: false,
         message: "Unauthorized access! User not identified.",
       });
@@ -206,7 +223,8 @@ const deleteIssue = async (req: Request, res: Response) => {
 
     // maintainer only check
     if (user.role !== "maintainer") {
-      return res.status(403).json({
+      return sendResponse(res, {
+        statusCode: 403,
         success: false,
         message: "Forbidden! Only maintainer can delete issues.",
       });
@@ -218,19 +236,22 @@ const deleteIssue = async (req: Request, res: Response) => {
 
     // check if issue existed
     if (result.rowCount === 0) {
-      return res.status(404).json({
+      return sendResponse(res, {
+        statusCode: 404,
         success: false,
         message: "Issue not found",
       });
     }
 
-    return res.status(200).json({
+    return sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Issue deleted successfully",
     });
   } catch (error: any) {
     // console.log(error);
-    return res.status(500).json({
+    return sendResponse(res, {
+      statusCode: 500,
       success: false,
       message: error?.message || "Failed to delete issue",
       errors: error,
