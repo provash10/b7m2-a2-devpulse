@@ -1,5 +1,11 @@
 https://github.com/Apollo-Level2-Web-Dev/B7A2
 
+  email : john.doe@devpulse.com (contributor)
+  email : admin@devpulse.com  (maintainer)
+  password: securePassword123
+
+
+
 ## 🔗 Links
 - **Live Deployment:** [Live API URL](https://your-deployment-url.vercel.app) *(Replace with your live URL after deploying)*
 - **GitHub Repository:** [GitHub Repo](https://github.com/provash10/b7m2-a2-devpulse)
