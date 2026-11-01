@@ -298,3 +298,13 @@ Method -> GET - Time-> 1793512412263 - URL ->/api/issues
 Method -> GET - Time-> 1793513040891 - URL ->/api/issues/a
 
 Method -> POST - Time-> 1793513570440 - URL ->/api/issues
+
+Method -> GET - Time-> 1793514082548 - URL ->/api/issues
+
+Method -> GET - Time-> 1793514282205 - URL ->/api/issues/2
+
+Method -> PATCH - Time-> 1793514626601 - URL ->/api/issues/2
+
+Method -> PATCH - Time-> 1793514745314 - URL ->/api/issues/2
+
+Method -> PATCH - Time-> 1793514827015 - URL ->/api/issues/2

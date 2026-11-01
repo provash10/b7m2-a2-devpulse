@@ -2,6 +2,7 @@ import { pool } from "../../db";
 import type {
   ICreateIssuePayload,
   IIssueQueryFilter,
+  IUpdateIssuePayload,
 } from "./issues.interface";
 
 const createIssueIntoDB = async (payload: ICreateIssuePayload) => {
@@ -142,8 +143,46 @@ const getSingleIssueFromDB = async (id: string) => {
   };
 };
 
+const getIssueByIdFromDB = async (id: string) => {
+  // query issue row by id
+  // console.log(id);
+  const result = await pool.query(`SELECT * FROM issues WHERE id = $1`, [id]);
+  // console.log(result.rows[0]);
+  return result.rows[0] || null;
+};
+
+const updateSingleIssueIntoDB = async (
+  id: string,
+  payload: IUpdateIssuePayload
+) => {
+  // get update payload data
+  // console.log(payload);
+  const { title, description, type, status } = payload;
+
+  // update issue in db
+  const result = await pool.query(
+    `
+    UPDATE issues
+    SET 
+      title = COALESCE($1, title),
+      description = COALESCE($2, description),
+      type = COALESCE($3, type),
+      status = COALESCE($4, status),
+      updated_at = NOW()
+    WHERE id = $5
+    RETURNING *
+    `,
+    [title, description, type, status, id]
+  );
+  // console.log(result.rows[0]);
+
+  return result.rows[0];
+};
+
 export const issuesService = {
   createIssueIntoDB,
   getAllIssuesFromDB,
   getSingleIssueFromDB,
+  getIssueByIdFromDB,
+  updateSingleIssueIntoDB,
 };

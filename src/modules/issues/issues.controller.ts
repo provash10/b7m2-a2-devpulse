@@ -111,8 +111,86 @@ const getSingleIssue = async (req: Request, res: Response) => {
   }
 };
 
+const updateIssue = async (req: Request, res: Response) => {
+  try {
+    // get issue id and user
+    const { id } = req.params;
+    const user = req.user;
+    // console.log(id);
+    // console.log(user);
+
+    // check if user authenticated
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized access! User not identified.",
+      });
+    }
+
+    // find issue from db
+    const issue = await issuesService.getIssueByIdFromDB(id as string);
+    // console.log(issue);
+
+    // check if issue exists
+    if (!issue) {
+      return res.status(404).json({
+        success: false,
+        message: "Issue not found",
+      });
+    }
+
+    // check role permissions
+    if (user.role === "contributor") {
+      // contributor can only update own issue
+      if (issue.reporter_id !== user.id) {
+        return res.status(403).json({
+          success: false,
+          message: "Forbidden! You can only update your own issues.",
+        });
+      }
+
+      // contributor can only update open status issue
+      if (issue.status !== "open") {
+        return res.status(409).json({
+          success: false,
+          message: "Conflict! Cannot update issue that is not in open status.",
+        });
+      }
+    }
+
+    // update issue data
+    const { title, description, type, status } = req.body;
+    // console.log(req.body);
+
+    const updatedIssue = await issuesService.updateSingleIssueIntoDB(
+      id as string,
+      {
+        title,
+        description,
+        type,
+        status,
+      }
+    );
+    // console.log(updatedIssue);
+
+    return res.status(200).json({
+      success: true,
+      message: "Issue updated successfully",
+      data: updatedIssue,
+    });
+  } catch (error: any) {
+    // console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: error?.message || "Failed to update issue",
+      errors: error,
+    });
+  }
+};
+
 export const issuesController = {
   createIssue,
   getAllIssues,
   getSingleIssue,
+  updateIssue,
 };
