@@ -19,3 +19,8 @@ export interface ICreateIssuePayload {
   reporter_id: number;
 }
 
+export interface IIssueQueryFilter {
+  sort?: "newest" | "oldest" | undefined;
+  type?: IssueType | undefined;
+  status?: IssueStatus | undefined;
+}
